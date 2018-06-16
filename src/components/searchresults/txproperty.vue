@@ -178,6 +178,19 @@
       </div>
     </div>
 
+    <div class="panel-block txrow">
+      <div class="columns">
+        <div class="column is-one-quarter content">
+          UTF-8 Pretty JSON
+        </div>
+        <div class="column is-three-quarters field control txvalue">
+          <pre readonly spellcheck="false" style="color: black;" >
+            
+{{ JSON.stringify( JSON.parse( decodedUTF8FromString( tx.signatureMessageFragment ) ), null, 2) }}
+          </pre>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
