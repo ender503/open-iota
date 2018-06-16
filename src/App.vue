@@ -207,10 +207,12 @@
     'https://node1.iotaner.org:443',
     'https://nodes.iota.cafe:443',
     'https://wallet1.iota.town:443',
-    'https://wallet2.iota.town:443'
+    'https://wallet2.iota.town:443',
+    // custom nodes
+    'http://node1.puyuma.org:14266'
   ]
 
-  const initialProvider = 'https://iota-node-nelson.prizziota.com:443'
+  const initialProvider = 'http://node1.puyuma.org:14266'
 
   export default {
     components: {BModal},
