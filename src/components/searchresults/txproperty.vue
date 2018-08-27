@@ -185,8 +185,7 @@
         </div>
         <div class="column is-three-quarters field control txvalue">
           <pre readonly spellcheck="false" style="color: black;" >
-            
-{{ JSON.stringify( JSON.parse( decodedUTF8FromString( tx.signatureMessageFragment ) ), null, 2) }}
+{{ beatifyJSON(tx.signatureMessageFragment) }}
           </pre>
         </div>
       </div>
@@ -229,6 +228,14 @@
           return TryteCodec.utf8StringFromTrytes(string)
         } catch (e) {
           return ''
+        }
+      },
+      beatifyJSON(string) {
+        try {
+          const json = JSON.parse( decodedUTF8FromString( string ) );
+          return JSON.stringify(json, null, 2);
+        } catch (e) {
+          return '';
         }
       }
     }
