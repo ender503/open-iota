@@ -25,6 +25,13 @@
         </div>
         <search-tx :results="outputTxs" :iota="iota" :overallStatus="bundleStatus" :inBundle="true"></search-tx>
       </div>
+
+      <div class="box" v-show="combineMessage.length > 0">
+        <div class="panel-block txrow">
+          <h1 class="title is-5">Message:</h1>
+        </div>
+        <pre style="white-space: pre-wrap;">{{ combineMessage }}</pre>
+      </div>
     </b-panel>
 
   </div>
@@ -32,6 +39,7 @@
 
 <script>
   import SearchTx from './tx'
+  import TryteCodec from 'tryte-utf8-json-codec'
 
   export default {
     name: 'search-bundle',
@@ -54,6 +62,28 @@
       },
       isValueTransfer () {
         return this.results.some(tx => tx.value !== 0)
+      },
+      combineMessage() {
+        try {
+
+          if (this.results.length == 0) {
+            return '';
+          }
+
+          var data = "";
+          var results = this.results.slice().reverse();
+          for (var i = 0; i < results.length; i++) {
+            data += results[i].signatureMessageFragment;
+          }
+
+          const text = TryteCodec.utf8StringFromTrytes(data);
+          const json = JSON.parse(text);
+
+          return JSON.stringify(json, null, 2);
+        } catch (e) {
+          console.log('error', e.message);
+          return ''
+        }
       }
     },
     filters: {
